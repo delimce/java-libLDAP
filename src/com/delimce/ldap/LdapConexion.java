@@ -9,7 +9,10 @@ package com.delimce.ldap;
  * @author luis
  */
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Hashtable; 
+import java.util.Properties;
 import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.naming.ldap.InitialLdapContext;
@@ -22,11 +25,16 @@ import javax.naming.ldap.LdapContext;
 public class LdapConexion {
     
     private Hashtable varConex;  //
-    private String user = "ldelima@novatec"; //usuario
-    private String pwd =  "!\"#$Qwer";  //password
-    private String server = "ldap://novatec-server:389"; //servidor
-    private String tconexion = "Simple"; //tipo de conexion
+    private String user; //usuario
+    private String pwd;  //password
+    private String server ; //servidor
+    private String tconexion; //tipo de conexion
 
+    public boolean isConectado() {
+        return conectado;
+    }
+    private boolean conectado = false; //si se pudo conectar  o no
+    
     public String getPwd() {
         return pwd;
     }
@@ -65,10 +73,8 @@ public class LdapConexion {
      * @return 
      */
     
-     public LdapContext getLdapContext(){  
-        LdapContext ctx = null;  
-        try{  
-            
+     public LdapContext getLdapContext() throws NamingException{  
+                       
             this.varConex = new Hashtable();
             
 
@@ -81,15 +87,55 @@ public class LdapConexion {
             varConex.put(Context.SECURITY_CREDENTIALS,this.pwd);  
             //in following property we specify ldap protocol and connection url.  
             //generally the port is 389  
-            varConex.put(Context.PROVIDER_URL,this.server);  
+            varConex.put(Context.PROVIDER_URL,this.server);
+            
+            LdapContext ctx = null;
             ctx = new InitialLdapContext(varConex, null);  
-          
-            System.out.println("Connection Successful.");  
-        }catch(NamingException nex){  
-            System.out.println("LDAP Connection: FAILED");  
-            nex.printStackTrace();  
-        }  
+            this.conectado = true;
         return ctx;  
-    }  
-    
+    }
+     
+     
+     /**
+      * metodo para leer la configuracion de un archivo externo
+      * @param archivo 
+      */
+     
+      public void leerConfig(String archivo) {
+
+        try {
+            //se crea una instancia a la clase Properties
+            Properties propiedades = new Properties();
+            //se leen el archivo .properties
+            
+            try{
+                
+             propiedades.load(new FileInputStream(archivo));
+             
+             
+            }catch (NullPointerException e2){
+                
+                System.out.println("No es posible leer el archivo de propiedades de conexion \n " + e2);
+                
+            }
+             
+            //si el archivo de propiedades NO esta vacio retornan las propiedes leidas
+            if (!propiedades.isEmpty()) {
+                
+                this.server = propiedades.getProperty("server").trim(); ///motor de base de datos a usar Mysql, Postgres u Oracle
+                this.user = propiedades.getProperty("user").trim(); ////nombre o ip del servidor
+                this.pwd = propiedades.getProperty("pwd").trim(); ///nombre de la base de datos
+                this.tconexion = propiedades.getProperty("tconexion").trim(); ///usuario de la db
+              
+                           
+            } else {//sino  retornara NULL
+                System.out.print("el archivo esta vacio: " + archivo);
+            }
+        } catch (IOException ex) {
+            System.out.println("No es posible leer el archivo de propiedades de conexion " + archivo);
+        }
+    }
+     
+     
+        
 }

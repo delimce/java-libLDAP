@@ -5,6 +5,9 @@
 package libldap;
 
 import com.delimce.ldap.LdapConexion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.naming.ldap.LdapContext;
 
 /**
@@ -23,7 +26,18 @@ public class LibLDAP {
         // TODO code application logic here
          
        LdapConexion res = new LdapConexion();
-     LdapContext algo =  res.getLdapContext();
+       
+       res.leerConfig("ldapconfig.properties");
+       
+        try {
+            LdapContext algo =  res.getLdapContext();
+            
+            System.out.println("Connection Successful."+res.isConectado()); 
+        } catch (NamingException ex) {
+            System.out.println("Connection Failed. "+res.isConectado());
+            
+          //  Logger.getLogger(LibLDAP.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
