@@ -29,6 +29,7 @@ public class LdapConexion {
     private String pwd;  //password
     private String server ; //servidor
     private String tconexion; //tipo de conexion
+    
 
     public boolean isConectado() {
         return conectado;
@@ -89,10 +90,10 @@ public class LdapConexion {
             //generally the port is 389  
             varConex.put(Context.PROVIDER_URL,this.server);
             
-            LdapContext ctx = null;
+            LdapContext ctx = null; ///objeto de contexto LDAP
             ctx = new InitialLdapContext(varConex, null);  
             this.conectado = true;
-        return ctx;  
+            return ctx;
     }
      
      
