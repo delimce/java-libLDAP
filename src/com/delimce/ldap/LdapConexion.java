@@ -11,7 +11,7 @@ package com.delimce.ldap;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Hashtable; 
+import java.util.Hashtable;
 import java.util.Properties;
 import javax.naming.Context;
 import javax.naming.NamingException;
@@ -27,7 +27,7 @@ public class LdapConexion {
     private Hashtable varConex;  //
     private String user; //usuario
     private String pwd;  //password
-    private String server ; //servidor
+    private String server; //servidor
     private String tconexion; //tipo de conexion
     
 

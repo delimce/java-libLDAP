@@ -14,7 +14,7 @@ import javax.naming.ldap.LdapContext;
 public class LdapContexto extends LdapConexion {
     
     
-    public LdapContext ctx = null; ///objeto de contexto LDAP
+    private LdapContext ctx = null; ///objeto de contexto LDAP
 
     public LdapContexto() {
     }
@@ -24,6 +24,11 @@ public class LdapContexto extends LdapConexion {
         this.leerConfig(ldapconfig);
         this.ctx = this.getLdapContext();
        
+    }
+    
+    public void limpiarContexto(){
+        
+        this.ctx = null;
     }
     
     
