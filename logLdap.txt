@@ -1,0 +1,5 @@
+2011-12-12 13:38:47,411 DEBUG [main/libldap.LibLDAP] - Connection Successful.
+2011-12-12 13:38:47,417 DEBUG [main/libldap.LibLDAP] - Connection Successful.
+2011-12-12 15:03:25,572 DEBUG [main/libldap.LibLDAP] - intento: 01 Connection Successful.
+2011-12-12 15:03:25,658 DEBUG [main/libldap.LibLDAP] - intento: 11 Connection Successful.
+2011-12-12 15:03:25,680 DEBUG [main/libldap.LibLDAP] - intento: 21 Connection Successful.

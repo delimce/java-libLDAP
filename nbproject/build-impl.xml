@@ -1027,7 +1027,7 @@ is divided into following sections:
     </target>
     <target depends="init" name="-do-clean">
         <delete dir="${build.dir}"/>
-        <delete dir="${dist.dir}" followsymlinks="false" includeemptydirs="true"/>
+        <delete dir="${dist.dir}" followsymlinks="true" includeemptydirs="true"/>
     </target>
     <target name="-post-clean">
         <!-- Empty placeholder for easier customization. -->
