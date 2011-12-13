@@ -66,8 +66,8 @@ public class LibLDAP {
                 } catch (NamingException ex)  {  
 
                     System.out.println("Connection Failed.");
-
-                    logger.debug("intento: "+ni+" "+ex);
+                    
+                     logger.debug("intento: "+ni+"  user: "+res.getUser()+" pwd: "+res.getPwd()+" "+ex);
                     
                 }
 

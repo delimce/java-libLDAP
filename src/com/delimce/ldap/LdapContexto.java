@@ -4,6 +4,8 @@
  */
 package com.delimce.ldap;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.naming.ldap.LdapContext;
 
@@ -26,9 +28,20 @@ public class LdapContexto extends LdapConexion {
        
     }
     
-    public void limpiarContexto(){
-        
-        this.ctx = null;
+    
+    
+    
+    public void limpiarContexto() {
+
+        try {
+            if (this.ctx != null) {
+                this.ctx.close();
+                this.ctx = null;
+            }
+        } catch (NamingException ex) {
+            Logger.getLogger(LdapContexto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
     
